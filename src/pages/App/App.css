@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
-
-body{
-font-family: 'Oxygen', sans-serif;
+.App {
+    font-family: 'Oxygen', sans-serif;
     width: 100vw;
     min-height: 100vh;
     background: rgb(34,20,2);
     background: linear-gradient(90deg, rgba(34,20,2,1) 0%, rgba(1,183,236,1) 33%, rgba(1,183,236,1) 66%, rgba(34,20,2,1) 100%);
-}
+  } 

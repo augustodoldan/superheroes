@@ -1,5 +1,21 @@
-.SearchNavbar-container{
-width: 70%;
-margin: 0 auto;
-padding-top: 3rem;
+.Searchbar-container {
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 3rem;
+}
+
+.input-group {
+  height: 10vh;
+  font-size: 4rem !important;
+}
+
+.search-button {
+  background-color: #f8f272 !important;
+  color: black !important;
+  letter-spacing: 5px;
+}
+
+.input-SearchBar {
+  font-size: 2rem !important;
+  letter-spacing: 2px;
 }

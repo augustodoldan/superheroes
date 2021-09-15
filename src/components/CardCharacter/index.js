@@ -5,7 +5,7 @@ import { ErrorContext } from "../../contexts/ErrorContext";
 import "../CardCharacter/CardCharacter.css";
 
 const CardCharacter = ({ agregar, borrar, character, indice }) => {
-  const { work, image, name, powerstats, appearance, biography, id } = character;
+  const { work, image, name, powerstats, appearance, biography } = character;
   const { team, setTeam } = useContext(TeamContext);
   const { setError } = useContext(ErrorContext);
 
@@ -44,11 +44,10 @@ const CardCharacter = ({ agregar, borrar, character, indice }) => {
     return true;
   };
 
-  const deleteCharacter = () => {           
-        team.splice(indice, 1);
-      setTeam([...team])
-    }
-  
+  const deleteCharacter = () => {
+    team.splice(indice, 1);
+    setTeam([...team]);
+  };
 
   const acumulativoPowerstats = Math.round(
     (parseInt(powerstats["intelligence"]) +
@@ -64,7 +63,11 @@ const CardCharacter = ({ agregar, borrar, character, indice }) => {
     <div className="CardCharacterComponent">
       <div className="card text-center bg-dark">
         <div className="overflow">
-          <img src={image.url} className="card-img-top img-card" />
+          <img
+            src={image.url}
+            className="card-img-top img-card"
+            alt="imagen del superheroe"
+          />
         </div>
         <div className="card-body text-light">
           <h4 className="card-title">{name}</h4>
@@ -98,7 +101,13 @@ const CardCharacter = ({ agregar, borrar, character, indice }) => {
           ) : (
             <></>
           )}
-          {borrar ? <button onClick={deleteCharacter}>Eliminar</button> : <></>}
+          {borrar ? (
+            <button onClick={deleteCharacter} className="delete-button">
+              Eliminar
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

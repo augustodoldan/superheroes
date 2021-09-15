@@ -1,7 +1,14 @@
 .App {
-    font-family: 'Oxygen', sans-serif;
-    width: 100vw;
-    min-height: 100vh;
-    background: rgb(34,20,2);
-    background: linear-gradient(90deg, rgba(34,20,2,1) 0%, rgba(1,183,236,1) 33%, rgba(1,183,236,1) 66%, rgba(34,20,2,1) 100%);
-  } 
+  font-family: "Bangers", "Courier New", Courier !important;
+  width: 100vw;
+  letter-spacing: 5px;
+  min-height: 100vh;
+  background: rgb(34, 20, 2);
+  background: linear-gradient(
+    90deg,
+    rgba(34, 20, 2, 1) 0%,
+    rgba(1, 183, 236, 1) 33%,
+    rgba(1, 183, 236, 1) 66%,
+    rgba(34, 20, 2, 1) 100%
+  );
+}

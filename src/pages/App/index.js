@@ -2,8 +2,10 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Equipo from "../Equipo";
 import Agregar from "../Agregar";
+import LoginForm from "../LoginForm";
 import TeamContextProvider from "../../contexts/TeamContextManagment";
 import ErrorContextProvider from "../../contexts/ErrorContext";
+import { authGuard } from "../../auth";
 
 function App() {
   return (
@@ -12,8 +14,17 @@ function App() {
         <TeamContextProvider>
           <ErrorContextProvider>
             <Switch>
-              <Route exact path="/" component={Equipo} />
-              <Route exact path="/agregar" component={Agregar} />
+              <Route
+                exact
+                path="/"
+                render={(props) => authGuard(props, Equipo)}
+              />
+              <Route
+                exact
+                path="/agregar"
+                render={(props) => authGuard(props, Agregar)}
+              />
+              <Route exact path="/login" component={LoginForm} />
             </Switch>
           </ErrorContextProvider>
         </TeamContextProvider>

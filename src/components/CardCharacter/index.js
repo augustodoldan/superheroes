@@ -1,34 +1,35 @@
 import { Accordion } from "react-bootstrap";
-import { useContext } from "react";
-import { TeamContext } from "../../contexts/TeamContextManagment";
-import { ErrorContext } from "../../contexts/ErrorContext";
 import "../CardCharacter/CardCharacter.css";
+import { useSelector, useDispatch } from "react-redux";
+import { newTeamActions } from "../../store/team-slice";
+import { newErrorActions } from "../../store/error-slice";
 
 const CardCharacter = ({ agregar, borrar, character, indice }) => {
   const { work, image, name, powerstats, appearance, biography } = character;
-  const { team, setTeam } = useContext(TeamContext);
-  const { setError } = useContext(ErrorContext);
+  const team = useSelector((state) => state.team.team);
+  const dispatch = useDispatch();
 
   const addCharacter = () => {
-    const nuevoTeam = [...team, character];
-
-    const esValido = validarEquipo(nuevoTeam);
+    const newTeam = [...team];
+    newTeam.push(character);
+    const esValido = validarEquipo(newTeam);
 
     if (esValido) {
-      return setTeam(nuevoTeam);
+      dispatch(newTeamActions.addHero(character));
     }
   };
-  const validarEquipo = (nuevoTeam) => {
-    if (nuevoTeam.length >= 7) {
-      setError("Podés poner hasta 6 superheroes");
+
+  const validarEquipo = (team) => {
+    if (team.length >= 7) {
+      dispatch(newErrorActions.addError("Podés poner hasta 6 superheroes"));
       return false;
     }
 
     let numeroDeBuenos = 0;
     let numeroDeMalos = 0;
 
-    for (let i = 0; i <= nuevoTeam.length - 1; i++) {
-      let superheroe = nuevoTeam[i];
+    for (let i = 0; i <= team.length - 1; i++) {
+      let superheroe = team[i];
       if (superheroe["biography"]["alignment"] === "good") {
         numeroDeBuenos = numeroDeBuenos + 1;
       } else if (superheroe["biography"]["alignment"] === "bad") {
@@ -37,7 +38,12 @@ const CardCharacter = ({ agregar, borrar, character, indice }) => {
     }
 
     if (numeroDeBuenos > 3 || numeroDeMalos > 3) {
-      setError("Sólo podes agregar 3 superheroes con el mismo 'alignment'");
+      dispatch(
+        newErrorActions.addError(
+          "Sólo podes agregar 3 superheroes con el mismo 'alignment'"
+        )
+      );
+
       return false;
     }
 
@@ -45,8 +51,7 @@ const CardCharacter = ({ agregar, borrar, character, indice }) => {
   };
 
   const deleteCharacter = () => {
-    team.splice(indice, 1);
-    setTeam([...team]);
+    dispatch(newTeamActions.deleteHero(indice));
   };
 
   const acumulativoPowerstats = Math.round(

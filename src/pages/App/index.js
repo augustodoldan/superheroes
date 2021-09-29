@@ -3,16 +3,15 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Equipo from "../Equipo";
 import Agregar from "../Agregar";
 import LoginForm from "../LoginForm";
-import TeamContextProvider from "../../contexts/TeamContextManagment";
-import ErrorContextProvider from "../../contexts/ErrorContext";
+import { Provider } from "react-redux";
+import store from '../../store'
 import { authGuard } from "../../auth";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <TeamContextProvider>
-          <ErrorContextProvider>
+        <Provider store={store}>
             <Switch>
               <Route
                 exact
@@ -26,8 +25,7 @@ function App() {
               />
               <Route exact path="/login" component={LoginForm} />
             </Switch>
-          </ErrorContextProvider>
-        </TeamContextProvider>
+            </Provider>
       </Router>
     </div>
   );

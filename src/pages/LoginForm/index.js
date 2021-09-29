@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
   const [error, setError] = useState(null);
@@ -20,7 +20,6 @@ const LoginForm = () => {
       password: Yup.string().required(),
     }),
     onSubmit: async (dataFormulario) => {
-      console.log(dataFormulario);
       try {
         const response = await axios.post(
           "http://challenge-react.alkemy.org/",

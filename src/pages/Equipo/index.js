@@ -1,12 +1,14 @@
 import Navbar from "../../components/Navbar";
 import Cards from "../../components/Cards";
-import { TeamContext } from "../../contexts/TeamContextManagment";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import "./Equipo.css";
 
 const Equipo = () => {
-  const { team } = useContext(TeamContext);
+  const team = useSelector((state) =>{
+    return state.team.team
+  } );
 
   return (
     <div>
